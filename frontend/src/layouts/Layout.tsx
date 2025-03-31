@@ -1,16 +1,12 @@
 import { Outlet } from "react-router-dom"
+import NavBar from "../components/navbar-sidebar/NavBar"
+import SideBar from "../components/navbar-sidebar/SideBar"
 
 export default function Layout() {
   return (
     <>
-        <header className="bg-gray-800">
-            <div className="mx-auto max-w-6xl py-10">
-                <h1 className="text-4xl font-extrabold text-white">
-                    Administrador de usuarios
-                </h1>
-            </div>
-        </header>
-
+        <NavBar />
+        <SideBar />
         <main className="mt-10 mx-auto max-w-6xl p-10 bg-white shadow">
             <Outlet />
         </main>
