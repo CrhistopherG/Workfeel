@@ -15,7 +15,7 @@ export async function action({request} : ActionFunctionArgs){
     await addUser(data)
 
     return redirect('/')
- }
+}
 
 export default function NewUser() {
 
