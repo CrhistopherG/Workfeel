@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import {createCompany, deleteCompany, getCompanies, getCompanyById, updateCompany} from '../handlers/company'
+import {createCompany, deleteCompany, getCompany, getCompanyById, updateCompany} from '../handlers/company'
 
 const router_company: Router = Router()
 
 //routing
-router_company.get('/', getCompanies)
+router_company.get('/', getCompany)
 
 router_company.get('/:id', getCompanyById)
 
