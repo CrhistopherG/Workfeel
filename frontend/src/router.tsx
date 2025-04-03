@@ -5,19 +5,47 @@ import NewUser, { action as newUserAction } from './views/NewUser'
 import CompanyList from './views/CompanyList'
 import { loader as companyLoader } from './views/CompanyList';
 import NewCompany, { action as newCompanyAction } from './views/NewCompany'
+import Login from './views/Login'
+import Dimensiones from './components/Encuestas/Dimensiones'
+import Preguntas from './components/Encuestas/Preguntas'
+import Escalas from './components/Encuestas/Escalas'
+import Periodo from './components/Periodo/Periodo'
 
 export const router = createBrowserRouter([
     {
+        index: true,
         path: '/',
+        element: <Login />
+    },
+    {
+        path: '/encuestas',
         element: <Layout />,
         children: [
             {
-                index: true,
+                path: '/encuestas/dimensiones',
+                element: <Dimensiones />
+            },
+            {
+                path: '/encuestas/preguntas',
+                element: <Preguntas />
+            },
+            {
+                path: '/encuestas/escalas',
+                element: <Escalas />
+            }
+        ]
+    },
+    {
+        path: '/usuarios',
+        element: <Layout />,
+        children: [
+            {
+                path: '/usuarios/ver_todos',
                 element: <User />,
                 loader: usersLoader
             },
             {
-                path: '/usuario/nuevo',
+                path: '/usuarios/nuevo',
                 element: <NewUser />,
                 action: newUserAction
             },
@@ -33,6 +61,16 @@ export const router = createBrowserRouter([
                 action: newCompanyAction, // Acción para agregar una nueva empresa
                  // Componente para agregar una nueva empresa
             },
+        ]
+    },
+    {
+        path: '/periodo', // Ruta independiente para Periodo
+        element: <Layout />, // Usa el mismo Layout si quieres mantener el diseño
+        children: [
+            {
+                index: true,
+                element: <Periodo />
+            }
         ]
     }
 ])
