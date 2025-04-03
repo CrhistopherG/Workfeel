@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault(); // Evita el envío por defecto del formulario
     console.log("Formulario enviado");
-    navigate("/usuarios");
+    navigate("/periodo");
   };
 
   return (

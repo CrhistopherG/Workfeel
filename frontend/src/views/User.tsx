@@ -17,18 +17,18 @@ export default function User() {
 
   return (
     <>
-        <div className="flex justify-around w-full">
+        <div className="flex justify-between px-17 w-full">
             <h2 className="text-4xl font-black text-slate 500">Usuarios</h2>
             <Link 
-                to="usuario/nuevo"
+                to="/usuarios/nuevo"
                 className="rounded-md bg-indigo-600 p-3 text-sm font-bold text-white shadows-sm hover:bg-indigo-500"
             >
                 Agregar usuario
             </Link>
         </div>
 
-        <div className="p-2 w-3xl h-auto">
-          <table className="w-full mt-5 table-auto">
+        <div className="p-2 w-5xl h-auto">
+          <table className="w-full border shadow-lg mt-5 table-auto">
             <thead className="bg-slate-800 text-white">
               <tr>
                 <th className="p-2">Usuario</th>

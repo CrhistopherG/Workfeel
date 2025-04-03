@@ -14,7 +14,7 @@ export async function action({request} : ActionFunctionArgs){
 
     await addUser(data)
 
-    return redirect('/')
+    return redirect('/usuarios/ver_todos')
  }
 
 export default function NewUser() {
@@ -27,7 +27,7 @@ export default function NewUser() {
         <div className="flex justify-around w-full">
             <h2 className="text-4xl font-black text-slate 500">Registrar usuario</h2>
             <Link 
-                to="/"
+                to="/usuarios/ver_todos"
                 className="rounded-md bg-indigo-600 p-3 text-sm font-bold text-white shadows-sm hover:bg-indigo-500"
             >
                 Volver a usuarios
@@ -35,7 +35,7 @@ export default function NewUser() {
         </div>
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
-        <Form className="mt-10 w-3xl" method='POST' action="">
+        <Form className="mt-10 w-5xl" method='POST' action="">
             <div className="mb-4">
                 <label htmlFor="name" className="text-gray-800">
                 Nombre usuario
