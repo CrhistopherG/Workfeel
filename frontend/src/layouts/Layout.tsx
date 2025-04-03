@@ -11,7 +11,7 @@ export default function Layout() {
               <SideBar/>
             </div>
             <div className="justify-center w-full">
-              <main className="mt-10 mx-5 p-10 bg-white shadow-lg justify-items-center">
+              <main className="mt-10 mx-5 p-5 bg-white shadow-lg justify-items-center">
                   <Outlet />
               </main>
             </div>
