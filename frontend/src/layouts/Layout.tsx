@@ -7,10 +7,14 @@ export default function Layout() {
     <>
         <NavBar />
         <div className="flex flex-row">
-            <SideBar/>
-            <main className="mt-10 max-w-6xl p-10 bg-white shadow">
-                <Outlet />
-            </main>
+            <div>
+              <SideBar/>
+            </div>
+            <div className="justify-center w-full">
+              <main className="mt-10 w-full p-10 bg-white shadow justify-items-center">
+                  <Outlet />
+              </main>
+            </div>
         </div>
     
     </>

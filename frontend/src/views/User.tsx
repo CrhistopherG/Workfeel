@@ -17,7 +17,7 @@ export default function User() {
 
   return (
     <>
-        <div className="flex justify-between">
+        <div className="flex justify-around w-full">
             <h2 className="text-4xl font-black text-slate 500">Usuarios</h2>
             <Link 
                 to="usuario/nuevo"
@@ -27,7 +27,7 @@ export default function User() {
             </Link>
         </div>
 
-        <div className="p-2">
+        <div className="p-2 w-3xl h-auto">
           <table className="w-full mt-5 table-auto">
             <thead className="bg-slate-800 text-white">
               <tr>

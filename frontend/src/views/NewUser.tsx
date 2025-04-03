@@ -24,7 +24,7 @@ export default function NewUser() {
 
   return (
     <>
-        <div className="flex justify-between">
+        <div className="flex justify-around w-full">
             <h2 className="text-4xl font-black text-slate 500">Registrar usuario</h2>
             <Link 
                 to="/"
@@ -35,7 +35,7 @@ export default function NewUser() {
         </div>
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
-        <Form className="mt-10" method='POST' action="">
+        <Form className="mt-10 w-3xl" method='POST' action="">
             <div className="mb-4">
                 <label htmlFor="name" className="text-gray-800">
                 Nombre usuario
