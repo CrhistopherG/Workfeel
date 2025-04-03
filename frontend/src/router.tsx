@@ -3,20 +3,47 @@ import Layout from './layouts/Layout'
 import User, { loader as usersLoader } from './views/User'
 import NewUser, { action as newUserAction } from './views/NewUser'
 import Login from './views/Login'
-import Periodo from "./views/periodo"
+import Dimensiones from './components/Encuestas/Dimensiones'
+import Preguntas from './components/Encuestas/Preguntas'
+import Escalas from './components/Encuestas/Escalas'
+import Periodo from './components/Periodo/Periodo'
+
 
 
 export const router = createBrowserRouter([
     {
+        index: true,
         path: '/',
         element: <Login />
+    },
+    {
+        path:'/periodo',
+        element: <Periodo />
+    },
+    {
+        path: '/encuestas',
+        element: <Layout />,
+        children: [
+            {
+                path: '/encuestas/dimensiones',
+                element: <Dimensiones />
+            },
+            {
+                path: '/encuestas/preguntas',
+                element: <Preguntas />
+            },
+            {
+                path: '/encuestas/escalas',
+                element: <Escalas />
+            }
+        ]
     },
     {
         path: '/usuarios',
         element: <Layout />,
         children: [
             {
-                index: true,
+                path: '/usuarios/ver_todos',
                 element: <User />,
                 loader: usersLoader
             },
