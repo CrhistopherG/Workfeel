@@ -48,59 +48,29 @@ export const router = createBrowserRouter([
                 path: '/usuarios/nuevo',
                 element: <NewUser />,
                 action: newUserAction
-            }
-        ]
-    },
-    {
-        path: '/empresa',
-        element: <Layout />,
-        children: [
+            },
+
             {
-                index: true,
+                path: '/empresa',
                 element: <CompanyList />,
-                loader: companyLoader // Loader para obtener la lista de empresas
+                loader: companyLoader, // Loader para obtener la lista de empresas
             },
             {
                 path: '/empresa/nueva',
                 element: <NewCompany />,
-                action: newCompanyAction // Acción para agregar una nueva empresa
-            }
+                action: newCompanyAction, // Acción para agregar una nueva empresa
+                 // Componente para agregar una nueva empresa
+            },
         ]
     },
     {
-        path: '/periodo',
-        element: <Layout />,
+        path: '/periodo', // Ruta independiente para Periodo
+        element: <Layout />, // Usa el mismo Layout si quieres mantener el diseño
         children: [
             {
                 index: true,
                 element: <Periodo />
             }
         ]
-    },
-    {
-        path: '/Panel_Administrativo',
-        element: <Layout />, // Layout exclusivo para el panel administrativo
-        children: [
-            {
-                index: true,
-                element: <CompanyList />, // Página principal del panel administrativo
-                loader: companyLoader,
-            },
-            {
-                path: 'empresa/nueva',
-                element: <NewCompany />,
-                action: newCompanyAction,
-            },
-            {
-                path: 'usuarios',
-                element: <User />,
-                loader: usersLoader,
-            },
-            {
-                path: 'usuarios/nuevo',
-                element: <NewUser />,
-                action: newUserAction,
-            },
-        ],
-    },
+    }
 ])
