@@ -13,7 +13,7 @@ import {
   import Company from "./Company.model";
   
   @Table({
-    tableName: "user",
+    tableName: "users",
     timestamps: false, // Evita createdAt y updatedAt
   })
   class User extends Model {
@@ -31,8 +31,9 @@ import {
   
     @Column({
       type: DataType.STRING(255),
+      allowNull: false // Asegúrate que no sea null
     })
-    password!: string;
+    password!: string; // El ! indica que siempre estará presente
   
     @Column({
       type: DataType.STRING(255),

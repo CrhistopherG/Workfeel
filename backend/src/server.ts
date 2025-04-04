@@ -1,57 +1,66 @@
-import express  from "express";
-import colors from 'colors'
-import cors, { CorsOptions} from 'cors'
+import express from "express";
+import colors from 'colors';
+import cors, { CorsOptions } from 'cors';
 import router_products from "./routers/router_products";
 import router_users from "./routers/router_users";
 import router_roles from "./routers/router_rol";
 import router_company from "./routers/router_company";
 import db from "./config/db";
 import router_department from "./routers/router_department";
+import router_auth from "./routers/router_auth";
 
-
-// Conectar a base de datos
+// Conectar a la base de datos
 async function connectDB(){
     try {
-
-        await db.authenticate()
-        db.sync()
+        await db.authenticate();
+        db.sync();
         console.log(colors.bgBlue.bold('Conexion exitosa a la base de datos'));
-        
     } catch (error) {
-
         console.log(error);
-        console.log(colors.red.bold('Hubo un error al conectar a la base de dato'));
-        
+        console.log(colors.red.bold('Hubo un error al conectar a la base de datos'));
     }
 }
 
-connectDB()
+connectDB();
 
-//Instancia de express
-const server = express()
+// Instancia de express
+const server = express();
 
-//Permitir conexiones
-const corsOptions : CorsOptions = {
+// Opciones de CORS
+const corsOptions: CorsOptions = {
     origin: function(origin, callback) {
-        if(origin === process.env.FRONTEND_URL ) {
-            callback(null, true)
-        } else {
-            callback(new Error('Error de CORS'))
-        }
-    }
-}
-server.use(cors(corsOptions))
+      // Allow requests with no origin (like mobile apps or Postman)
+      if (!origin) return callback(null, true);
+      
+      const allowedOrigins = [
+        process.env.FRONTEND_URL,
+        'http://localhost:5173',
+        'http://127.0.0.1:5173'
+      ];
+      
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      
+      console.log('Blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true, // This is crucial for authentication
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  };
+  
+  server.use(cors(corsOptions));
+  server.options('*', cors(corsOptions)); // Preflight
 
-//Leer datos de formularios
-server.use(express.json())
+server.use(express.json());
 
+// Mandar routers
+server.use('/api/products', router_products);
+server.use('/api/users', router_users);
+server.use('/api/roles', router_roles);
+server.use('/api/company', router_company);
+server.use('/api/department', router_department);
+server.use('/api', router_auth);
 
-// Mandar router
-server.use('/api/products', router_products)
-server.use('/api/users', router_users)
-server.use('/api/roles', router_roles)
-server.use('/api/company', router_company)
-server.use('/api/department', router_department)
-
-
-export default server
+export default server;

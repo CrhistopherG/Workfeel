@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { check, validationResult } from 'express-validator'
-import User from '../models/User.model';
+import User from '../models/Users.model';
 
 
 export const getUsers = async (req: Request, res: Response) => {

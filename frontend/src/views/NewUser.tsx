@@ -11,7 +11,7 @@ export async function action({request} : ActionFunctionArgs){
     if(error.length) {
         return error
     }
-
+    
     await addUser(data)
 
     return redirect('/usuarios/ver_todos')
