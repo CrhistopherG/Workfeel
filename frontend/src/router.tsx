@@ -1,4 +1,3 @@
-// src/router.ts
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import Layout from './layouts/Layout'
 import User, { loader as usersLoader } from './views/User'
