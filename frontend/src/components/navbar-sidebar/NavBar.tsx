@@ -11,7 +11,7 @@ export default function NavBar() {
   return (
     <header className="bg-gray-300 shadow-black lg max-h-17 shadow flex justify-between">
       <div className="mx-4 max-w-6xl py-2 flex text-start items-center">
-        <Link to="/dashboard">
+        <Link to="/periodo">
           <img className="lg:w-xs md:w-2xs w-40" src="/workfeel-logo.png" alt="Workfeel Logo"/>
         </Link>
       </div>
@@ -21,8 +21,8 @@ export default function NavBar() {
         <FaRegUserCircle className="lg:w-8 lg:h-8 md:w-6 md:h-6 w-4 h-8 mx-1" />
         
         <div className="flex items-center">
-          <h1 className="lg:text-lg md:text-sm text-xs text-black mx-1 text-nowrap">
-            Bienvenido {user?.name || 'Invitado'}
+          <h1 className=" uppercase lg:text-md md:text-sm text-xs text-black mx-1 text-nowrap">
+          {user?.name || 'Invitado'}
           </h1>
           {user && (
             <button 
