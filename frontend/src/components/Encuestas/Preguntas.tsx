@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { MdHelpOutline } from "react-icons/md";
 import { IoFileTrayFullSharp } from "react-icons/io5";
+//llamamos la funcion de nuestro componente
+import Question from "../../views/dimension/question";
 
 const Preguntas = () => {
   return (
@@ -74,33 +76,8 @@ const Preguntas = () => {
       </div>
 
       {/* Tabla */}
-      <div className="mt-4">
-        <div className="flex justify-between items-center bg-gray-600 text-white px-4 py-2 rounded-t-md">
-          <span className="font-semibold">Preguntas Activas</span>
-          <div className="w-1/2">
-            <input
-              type="text"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-              placeholder="Buscar preguntas..."
-            />
-          </div>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="table-auto w-full border-collapse border border-gray-300 rounded-md shadow-md">
-            <thead className="bg-gray-600 text-white">
-              <tr>
-                <th className="px-4 py-2 border border-gray-300">#</th>
-                <th className="px-4 py-2 border border-gray-300">Dimensiones</th>
-                <th className="px-4 py-2 border border-gray-300">Pregunta</th>
-                <th className="px-4 py-2 border border-gray-300">Configuración de pregunta</th>
-                <th className="px-4 py-2 border border-gray-300">Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* Aquí puedes agregar filas dinámicamente */}
-            </tbody>
-          </table>
-        </div>
+      <div>
+        <Question />
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
-import { Request, Response } from 'express'
+import { Request, Response,NextFunction } from 'express'
 import { check, validationResult } from 'express-validator'
 import Company from '../models/Company.model'
+import User from '../models/Users.model';
+
 
 
 //funcion de obtener todas las compañias ya funciona

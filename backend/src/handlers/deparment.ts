@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { check, validationResult } from 'express-validator'
 import Department from '../models/Department.model'
 
-
+//funcion para mostrar departemento 
 export const getDepartments= async (req: Request, res: Response) => {
     try {
         const departments = await Department.findAll({
@@ -17,6 +17,7 @@ export const getDepartments= async (req: Request, res: Response) => {
     }
 }
 
+//funcion para buscar de[artamento por id ]
 export const getDepartmentById = async (req: Request, res: Response) => {
     try {
         const { id } = req.params
@@ -35,6 +36,7 @@ export const getDepartmentById = async (req: Request, res: Response) => {
     }
 }
 
+//funcion para crear departamento 
 export const createDepartment = async (req: Request, res: Response) => {
         // Validacion
         await check('name')
