@@ -8,7 +8,6 @@ import router_company from "./routers/router_company";
 import db from "./config/db";
 import router_department from "./routers/router_department";
 import router_auth from "./routers/router_auth";
-
 // Conectar a la base de datos
 async function connectDB(){
     try {
@@ -62,5 +61,10 @@ server.use('/api/roles', router_roles);
 server.use('/api/company', router_company);
 server.use('/api/department', router_department);
 server.use('/api', router_auth);
+
+server.use('*', (req, res) => {
+  res.status(404).json({ message: `Ruta no encontrada: ${req.originalUrl}` });
+});
+
 
 export default server;
