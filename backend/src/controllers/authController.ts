@@ -70,7 +70,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     
     const user = await User.findOne({ 
       where: { email },
-      attributes: ['user_id', 'name', 'password', 'email', 'rol_id'],
+      attributes: ['user_id', 'name', 'password', 'email', 'rol_id', 'company_id'],
       raw: true
     });
 
@@ -79,7 +79,8 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       user_id: user?.user_id,
       email: user?.email,
       passwordInDB: user?.password ? '*** (existe)' : 'undefined (error)',
-      rol_id: user?.rol_id
+      rol_id: user?.rol_id,
+      company_id: user?.company_id
     });
 
     if (!user) {
@@ -120,7 +121,9 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       user: {
         id: user.user_id,
         name: user.name,
-        email: user.email
+        email: user.email,
+        rol_id: user.rol_id,
+        company_id: user.company_id
       }
     });
     

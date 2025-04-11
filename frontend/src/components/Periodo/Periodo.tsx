@@ -1,7 +1,28 @@
-
 import { BsExclamationTriangle } from "react-icons/bs";
+import { useLoaderData } from "react-router-dom";
+import { Period } from "../../types";
+import PeriodDetails from "../PeriodDetails";
+import { getPeriods } from "../../services/PeriodService";
+
+
+export async function loader() {
+  try {
+    const periods = await getPeriods();
+    console.log(periods.data);
+    
+    return periods.data;
+  } catch (error) {
+    console.error("Error cargando periodos:", error);
+    // Puedes devolver un array vacío o manejar el error como prefieras
+    return [];
+  }
+  
+}
 
 const Periodo = () => {
+
+  const periods = useLoaderData() as Period[]
+
   return (
     <>
       <div className="text-center">
@@ -31,9 +52,9 @@ const Periodo = () => {
             />
           </div>
           {/* Tabla */}
-          <table className="w-full border-collapse border border-gray-300">
+          <table className="w-full border-2">
             <thead>
-              <tr className="bg-gray-800 text-white">
+              <tr className="bg-gray-700 text-2xl text-white">
                 <th className="py-2 px-4">Periodos</th>
                 <th className="py-2 px-4">Estado</th>
                 <th className="py-2 px-4">Fecha de inicio</th>
@@ -42,7 +63,15 @@ const Periodo = () => {
               </tr>
             </thead>
             <tbody>
-              {/* Aquí van los datos */}
+            {Array.isArray(periods) && periods.length > 0 ? (
+                periods.map((period) => <PeriodDetails key={period.period_id} period={period} />)
+              ) : (
+                <tr>
+                  <td colSpan={5} className="text-center text-gray-500">
+                    No hay periodos disponibles.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

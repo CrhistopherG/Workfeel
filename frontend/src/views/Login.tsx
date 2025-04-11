@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -32,10 +32,12 @@ export default function Login() {
     }
   };
 
-  if (isAuthenticated) {
-    navigate('/periodo');
-    return null;
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/api/users');
+    }
+  }, [isAuthenticated]);
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

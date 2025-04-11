@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { IoFileTrayFullSharp } from "react-icons/io5";
 
+export async function loader() {
+  console.log('Desde loader dimension...');
+  
+}
+
 const Dimensiones = () => {
   return (
     <div className="container mx-auto px-4">
