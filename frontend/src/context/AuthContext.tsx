@@ -6,6 +6,7 @@ interface User {
   name: string;
   email: string;
   rol_id: number;
+  company_id: number;
   token?: string; // Hacer opcional para casos donde no esté presente
 }
 
@@ -59,14 +60,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, {
         email,
         password
-      });
+      });      
 
       if (response.data.success) {
         const userData = {
-          user_id: response.data.user.user_id,
+          user_id: response.data.user.id,
           name: response.data.user.name,
           email: response.data.user.email,
           rol_id: response.data.user.rol_id,
+          company_id: response.data.user.company_id,
           ...(response.data.token && { token: response.data.token }) // Token opcional
         };
         

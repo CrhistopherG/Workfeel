@@ -4,7 +4,7 @@
   "description": "REST API diseñada para Workfeel",
   "main": "index.js",
   "scripts": {
-    "dev": "kill-port 4000 && kill-port 4000 && nodemon --exec ts-node src/index.ts"
+    "dev": "kill-port 4010 && kill-port 4010 && nodemon --exec ts-node src/index.ts"
   },
   "author": "Crhistopher Isai Ramirez Gutierrez",
   "license": "ISC",

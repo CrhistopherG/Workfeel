@@ -4,11 +4,15 @@ import User, { loader, loader as usersLoader } from './views/User'
 import escales, { loader as escalesLoader } from './views/escales'
 import NewUser, { action as newUserAction } from './views/NewUser'
 import Login from './views/Login'
-import Escalasorigin from './components/Encuestas/Escalasorigin'
+
 import Dimensiones from './components/Encuestas/Dimensiones'
 import { Resultado } from './components/Resultados/Resultado'
-import Preguntas from './components/Encuestas/Preguntas'
 import Periodo from './components/Periodo/Periodo'
+
+import Dimensiones, {loader as DimensionLoader} from './components/Encuestas/Dimensiones'
+import Preguntas from './components/Encuestas/Preguntas'
+import Escalas from './components/Encuestas/Escalas'
+import Periodo, { loader as PeriodoLoader } from './components/Periodo/Periodo'
 import ProtectedRoute from './auth/ProtectedRoute'
 import CompanyList, { loader as companylist } from './views/CompanyList'
 import NewCompany, { action as newcompany } from './views/NewCompany'
@@ -34,13 +38,16 @@ export const router = createBrowserRouter([
         element: <Layout />,
         children: [
           {
-            index: true,
-            element: <Periodo />
+            path: '/api/users',
+            element: <Periodo />,
+            loader: PeriodoLoader
           },
           {
             path: '/encuestas/dimensiones',
             element: <Dimensiones />,
+
             loader: Dimensionloader
+
           },
           {
             path: '/encuestas/preguntas',

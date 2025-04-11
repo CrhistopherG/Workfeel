@@ -5,6 +5,11 @@ import { IoFileTrayFullSharp } from "react-icons/io5";
 import Dimension from "../../views/dimension/dimension";
 //llamamos la funcion de nues
 
+export async function loader() {
+  console.log('Desde loader dimension...');
+  
+}
+
 const Dimensiones = () => {
   return (
     <div className="container mx-auto px-4">

@@ -8,11 +8,11 @@ import router_company from "./routers/router_company";
 import db from "./config/db";
 import router_department from "./routers/router_department";
 import router_auth from "./routers/router_auth";
+
 import router_scale from "./routers/router_scale";
 import router_dimension from "./routers/router_dimension";
 import router_question from "./routers/router_question";
 import rounter_periods from "./routers/router_periods";
-
 // Conectar a la base de datos
 async function connectDB(){
     try {
@@ -67,7 +67,16 @@ server.use('/api/users', router_users);
 server.use('/api/company', router_company);
 server.use('/api/department', router_department);
 server.use('/api', router_auth);
+
 server.use('/api/scale', router_scale);
 server.use('/api/dimension', router_dimension);
 server.use('/api/question', router_question)
+
+
+server.use('*', (req, res) => {
+  res.status(404).json({ message: `Ruta no encontrada: ${req.originalUrl}` });
+});
+
+
 export default server;
+
