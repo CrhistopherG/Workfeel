@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { IoFileTrayFullSharp } from "react-icons/io5";
+import Dimension from "../../views/dimension/dimension";
+//llamamos la funcion de nues
 
 export async function loader() {
   console.log('Desde loader dimension...');
@@ -75,33 +77,11 @@ const Dimensiones = () => {
       </div>
 
       {/* Tabla de Dimensiones */}
-      <div className="bg-white border rounded-md shadow-md p-4">
-        <div className="flex justify-between items-center bg-gray-600  text-black px-4 py-2 rounded-t-md">
-          <span className="font-semibold">Dimensiones o Áreas</span>
-          <div className="flex items-center">
-            <span className="mr-2">Activo</span>
-            <label className="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" className="sr-only peer" defaultChecked />
-              <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600 relative">
-                <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full peer-checked:translate-x-5 transition-transform"></div>
-              </div>
-            </label>
-          </div>
-        </div>
-        <table className="w-full mt-4 text-left border-collapse">
-          <thead className="bg-gray-600  text-black">
-            <tr>
-              <th className="px-4 py-2">Orden</th>
-              <th className="px-4 py-2">Dimensiones o Áreas</th>
-              <th className="px-4 py-2 text-center">Opciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Aquí puedes agregar filas dinámicamente */}
-          </tbody>
-        </table>
+      <div >
+        {/* llamamos nuestro tabla de dimensiones */}
+        <Dimension />
       </div>
-    </div>
+    </div >
   );
 };
 
