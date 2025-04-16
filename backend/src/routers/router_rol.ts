@@ -1,19 +1,19 @@
 import { Router } from 'express'
-import { createJob, deleteJob, getJobById, getJobs, updateJob } from '../handlers/job'
+import { createRol, deleteRol, getRolById, getRoles, updateRol } from '../handlers/rol'
 
-const router_job: Router = Router()
+const router_rol: Router = Router()
 
 //routing
-router_job.get('/', getJobs)
+router_rol.get('/', getRoles)
 
-router_job.get('/:id', getJobById)
+router_rol.get('/:id', getRolById)
 
-router_job.post('/', createJob)
+router_rol.post('/', createRol)
 
-router_job.patch('/:id', updateJob)
+router_rol.patch('/:id', updateRol)
 
-router_job.delete('/:id', deleteJob)
+router_rol.delete('/:id', deleteRol)
 
 
 
-export default router_job
+export default router_rol

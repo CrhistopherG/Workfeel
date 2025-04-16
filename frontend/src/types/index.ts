@@ -4,7 +4,8 @@ import { number, object, string, InferOutput, array, union, null_, boolean, date
 export const DraftUserSchema = object({
     name: string(),
     password: string(),
-    email: string()
+    email: string(),
+    rol_id: number()
 })
 
 export const UserSchema = object({

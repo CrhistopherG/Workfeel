@@ -1,7 +1,7 @@
 //implementamos nuestro company
 import { safeParse } from "valibot";
 import axios from "axios";
-import { DraftCompanySchema, CompanySchema, CompanysSchema } from "../types";
+import { DraftCompanySchema, CompanysSchema } from "../types";
 
 type CompanyData = {
     name: string;

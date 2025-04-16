@@ -8,6 +8,7 @@ import Preguntas from './components/Encuestas/Preguntas'
 import Escalas from './components/Encuestas/Escalas'
 import Periodo, { loader as PeriodoLoader } from './components/Periodo/Periodo'
 import ProtectedRoute from './auth/ProtectedRoute'
+import ModuloPanelAdmin from './components/navbar-sidebar/Modulos/ModuloPanelAdmin'
 
 
 export const router = createBrowserRouter([
@@ -24,7 +25,7 @@ export const router = createBrowserRouter([
         element: <Layout />,
         children: [
           {
-            path: '/api/users',
+            path: '/api/periodo',
             element: <Periodo />,
             loader: PeriodoLoader
           },
@@ -42,18 +43,18 @@ export const router = createBrowserRouter([
             element: <Escalas />
           },
           {
-            path: '/usuarios/ver_todos',
+            path: '/panel_administrativo',
+            element: <ModuloPanelAdmin />
+          },
+          {
+            path: '/panel_administrativo/usuarios/ver_todos',
             element: <User />,
             loader: usersLoader
           },
           {
-            path: '/usuarios/nuevo',
+            path: '/panel_administrativo/usuarios/nuevo',
             element: <NewUser />,
             action: newUserAction
-          },
-          {
-            path: '/periodo',
-            element: <Periodo />
           }
         ]
       }

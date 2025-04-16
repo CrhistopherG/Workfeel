@@ -17,10 +17,10 @@ export default function User() {
 
   return (
     <>
-        <div className="flex justify-between px-17 w-full">
+        <div className="flex justify-around px-17 w-full">
             <h2 className="text-4xl font-black text-slate 500">Usuarios</h2>
             <Link 
-                to="/usuarios/nuevo"
+                to="/panel_administrativo/usuarios/nuevo"
                 className="rounded-md bg-indigo-600 p-3 text-sm font-bold text-white shadows-sm hover:bg-indigo-500"
             >
                 Agregar usuario

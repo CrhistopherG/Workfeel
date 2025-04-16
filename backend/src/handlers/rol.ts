@@ -6,15 +6,12 @@ import Rol from '../models/Rol.model'
 export const getRoles= async (req: Request, res: Response) => {
     try {
         const roles = await Rol.findAll({
-            order: [
-                ['rol_id', 'ASC']
-            ]
-        })
-        res.json({data: roles})
-    } catch (error) {
-        console.log(error);
-        
-    }
+          attributes: ['rol_id', 'name']
+        });
+        res.json(roles);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
 }
 
 export const getRolById = async (req: Request, res: Response) => {

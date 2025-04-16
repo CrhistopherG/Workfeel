@@ -22,7 +22,7 @@ export default function Login() {
     try {
       const success = await login(email, password);
       if (success) {
-        navigate('/periodo'); // Redirige a la ruta principal después del login
+        navigate('/api/users'); // Redirige a la ruta principal después del login
       } else {
         setLocalError('Credenciales incorrectas');
       }
