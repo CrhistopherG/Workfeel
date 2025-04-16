@@ -2,9 +2,13 @@ import { safeParse } from "valibot";
 import axios from "axios";
 import { DraftUserSchema, UsersSchema } from "../types";
 
-type UserData = {
-    [k: string]: FormDataEntryValue;
+export type UserData = {
+  name: string;
+  password: string;
+  email: string;
+  rol_id: number;
 }
+
 
 const API_URL = import.meta.env.VITE_API_URL;
 const axiosConfig = {
@@ -28,7 +32,8 @@ export async function addUser(data: UserData) {
     const response = await axios.post(`${API_URL}/api/users`, {
       name: result.output.name,
       password: result.output.password,
-      email: result.output.email
+      email: result.output.email,
+      rol_id: result.output.rol_id
     }, axiosConfig);
 
     return response.data;

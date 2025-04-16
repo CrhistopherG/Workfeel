@@ -6,6 +6,9 @@ import { useAuth } from "../../context/AuthContext";
 import { RiLogoutBoxLine } from "react-icons/ri";
 
 export default function NavBar() {
+
+  const userData = JSON.parse(localStorage.getItem('user') || '{}')
+
   const { user, logout } = useAuth();
 
   return (
@@ -17,6 +20,12 @@ export default function NavBar() {
       </div>
       
       <div className="mx-4 max-w-6xl py-2 flex justify-between text-end items-center">
+
+        {userData.rol_id == 1 && 
+          <Link to="/panel_administrativo" className="mx-3 px-6 py-2  bg-indigo-950 text-white rounded-xl uppercase">
+            Administrador
+          </Link>
+        }
         <IoIosNotifications className="lg:w-8 lg:h-8 md:w-6 md:h-6 w-4 h-8 mx-1"/>
         <FaRegUserCircle className="lg:w-8 lg:h-8 md:w-6 md:h-6 w-4 h-8 mx-1" />
         

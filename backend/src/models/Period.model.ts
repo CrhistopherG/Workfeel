@@ -28,12 +28,12 @@ class Period extends Model {
     status: boolean
 
     @Column({
-        type: DataType.DATE
+        type: DataType.DATEONLY
     })
     date_start: string
     
     @Column({
-        type: DataType.DATE
+        type: DataType.DATEONLY
     })
     date_end: string
 
