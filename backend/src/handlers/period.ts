@@ -64,10 +64,49 @@ export const getPeriods = async (req: Request, res: Response) => {
     }
 };
 
-export const createPeriod = async (req: Request, res: Response) => {
+export const createPeriod = async (req: Request, res: Response) : Promise<any> => {
     try {
-        const newPeriod = await Period.create(req.body);
-        return res.status(201).json(newPeriod);
+        const { userId } = req.params;
+
+        if (!userId) {
+            return res.status(400).json({
+                success: false,
+                message: 'Se requiere el ID de usuario'
+            });
+        }
+
+        // Buscar el usuario por su ID
+        const user = await User.findByPk(userId, {
+            attributes: ['user_id', 'company_id'],
+            raw: true
+        });
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'Usuario no encontrado'
+            });
+        }
+
+        if (!user.company_id) {
+            return res.status(400).json({
+                success: false,
+                message: 'El usuario no tiene compañía asignada'
+            });
+        }
+
+        // Crear el período con el company_id del usuario
+        const newPeriod = await Period.create({
+            ...req.body,
+            company_id: user.company_id
+        });
+
+        return res.status(201).json({
+            success: true,
+            message: 'Periodo creado correctamente',
+            data: newPeriod
+        });
+
     } catch (error) {
         console.error('Error en createPeriod:', error);
         return res.status(500).json({

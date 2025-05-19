@@ -47,6 +47,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           });
         }
       } catch (e) {
+        console.log(e);
+        
         localStorage.removeItem('user');
         setUser(null);
       }
@@ -78,6 +80,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
       return false;
     } catch (err) {
+      console.log(err);
+      
       setError('Credenciales incorrectas o error de conexión');
       return false;
     }
