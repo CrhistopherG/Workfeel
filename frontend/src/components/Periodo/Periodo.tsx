@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import { Period } from "../../types";
 import PeriodDetails from "../PeriodDetails";
-import { getPeriods } from "../../services/PeriodService";
+import { getPeriods, createPeriod } from "../../services/PeriodService";
 import { BsExclamationTriangle } from "react-icons/bs";
 import { useState } from "react";
 import axios from "axios";
@@ -55,16 +55,12 @@ const Periodo = () => {
     }
 
     try {
-      await axios.post("http://localhost:5173/api/periods", {
-        ...newPeriod,
-        status: true,
-        company_id: companyId,
-      });
-      setShowModal(false);
-      window.location.reload();
+      await createPeriod(name, date_start, date_end, companyId);
+      alert("Periodo creado exitosamente.");
+      setNewPeriod({ name: "", date_start: "", date_end: "" });
+      window.location.reload(); 
     } catch (error) {
-      console.error("Error al crear periodo:", error);
-      alert("Hubo un error al crear el periodo.");
+      alert("Hubo un error al crear el periodo. Inténtalo nuevamente.");
     }
   };
 
