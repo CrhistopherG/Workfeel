@@ -64,7 +64,7 @@ export const getPeriods = async (req: Request, res: Response) => {
     }
 };
 
-export const createPeriod = async (req: Request, res: Response) => {
+export const createPeriod = async (req: Request, res: Response) : Promise<any> => {
     try {
         const { userId } = req.params;
 

@@ -7,7 +7,7 @@ import {
   updateUser
 } from '../handlers/user';
 
-import { createPeriod, getPeriods } from '../handlers/period'; // 👈 Asegúrate que esta ruta sea correcta
+import { createPeriod, getPeriods } from '../handlers/period';
 
 const router_users: Router = Router();
 
@@ -20,5 +20,5 @@ router_users.delete('/:id', deleteUser);
 
 // Periodos por usuario
 router_users.get('/:userId/periods', getPeriods); // 👈 Esta es la nueva ruta que necesitas
-router_users.post('/:userId/newPeriod', createPeriod)
+router_users.post('/:userId/newPeriod', createPeriod);
 export default router_users;
