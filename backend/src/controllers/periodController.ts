@@ -37,7 +37,54 @@ export const createPeriod = async (req: Request, res: Response): Promise<any> =>
         });
 
     }catch(error: any){
-        console.error('PeriodController.GetPeriods.Error: ', error);
+        console.error('PeriodController.CreatePeriod.Error: ', error);
+        const status = error.status || 500;
+        return res.status(status).json({
+            success: false, 
+            message: error.message || 'Internal error server',
+            error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        })
+    }
+}
+
+export const detelePeriod = async (req: Request, res: Response): Promise<any> =>{
+    try{
+        const { userId, periodId } = req.params;
+
+        await periodService.deletePeriod(userId, periodId);
+
+        return res.status(200).json({
+            success: true, 
+            message: 'Period deleted'
+        })
+
+    }catch(error: any){
+        console.error('PeriodController.DeletePeriod.Error: ', error);
+        const status = error.status || 500;
+        return res.status(status).json({
+            success: false, 
+            message: error.message || 'Internal error server',
+            error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        })
+    }
+}
+
+
+export const updatePeriod = async (req: Request, res: Response): Promise<any> => {
+    try{
+        const { userId, periodId } = req.params;
+        const { name, date_start, date_end, company_id, status} = req.body;
+
+        const periodUpdated = await periodService.updatePeriod(userId, periodId, { name, date_start, date_end, company_id, status});
+
+        return res.status(200).json({
+            success: true, 
+            message: 'Period updated',
+            data: periodUpdated
+        });
+
+    }catch(error: any){
+        console.error('PeriodController.UpdatePeriod.Error: ', error);
         const status = error.status || 500;
         return res.status(status).json({
             success: false, 
