@@ -2,6 +2,29 @@ import { Request, Response } from 'express';
 import * as periodService from '../Services/periodService'
 
 
+export const getPeriod = async (req: Request, res:Response): Promise<any> => {
+
+    try{
+        const { userId, periodId } = req.params;
+        const period = await periodService.getPeriodById(userId, periodId);
+
+        return res.json({
+            success: true,
+            data: period
+        });
+
+    }catch(error: any){
+        console.error('PeriodController.GetPeriod.Error: ', error);
+        const status = error.status || 500;
+        return res.status(status).json({
+            success: false, 
+            message: error.message || 'Internal error server',
+            error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        })
+    }
+
+}
+
 export const getPeriods = async (req: Request, res: Response): Promise<any> => {
     try{
         const { userId } = req.params;

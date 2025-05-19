@@ -4,6 +4,33 @@ import { CreatePeriodDTO } from '../DTO/CreatePeriodDTO';
 import { UpdatePeriodDTO } from '../DTO/UpdatePeriodDTO';
 
 
+export const getPeriodById = async (userId: string, periodId) => {
+
+    if(!userId){ throw{status: 400, message: 'User ID is required'}};
+
+    const periodIdNum = parseInt(periodId, 10);
+    if (isNaN(periodIdNum)) {
+        throw { status: 400, message: 'periodId must be a valid number' };
+    }
+
+    const user: User = await User.findByPk(userId, {
+        attributes: ['user_id', 'company_id'],
+        raw: true
+    });
+
+    if(!user) { throw{status: 404, message: 'User not found'} };
+
+    const period = await Period.findOne({
+        where:{
+            period_id: periodIdNum
+        }
+    });
+
+    if(!period){ throw{status: 404, message: 'Period not found'}; }
+
+    return period;
+}
+
 export const getPeriodsByUserId = async (userId: string) => {
 
     if(!userId){ throw{status: 400, message: 'User ID is required'}};

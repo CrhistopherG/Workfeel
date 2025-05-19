@@ -21,6 +21,7 @@ router_users.delete('/:id', deleteUser);
 
 // Periodos por usuario
 router_users.get('/:userId/periods', periodController.getPeriods); 
+router_users.get('/:userId/periods/:periodId', periodController.getPeriod);
 router_users.post('/:userId/newPeriod', periodController.createPeriod);
 router_users.delete('/:userId/periods/:periodId', periodController.detelePeriod);
 router_users.put('/:userId/periods/:periodId', periodController.updatePeriod);
