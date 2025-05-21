@@ -12,6 +12,8 @@ class Dimension extends Model {
     @AutoIncrement
     @Column({
         type: DataType.INTEGER,
+        field: 'dimension_id' // <-- asegúrate de esto
+
     })
     dimension_id: number
 

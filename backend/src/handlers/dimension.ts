@@ -21,7 +21,7 @@ export const getDimensions = async (req: Request, res: Response) => {
 export const getDimensionById = async (req: Request, res: Response) => {
     try {
         const { id } = req.params
-        const dimension = await Dimension.findByPk(id)
+        const dimension = await Dimension.findByPk(id);
         console.log(dimension);
         
 
@@ -44,7 +44,8 @@ export const createDimension = async (req: Request, res: Response) => {
         const newDimension = await Dimension.create({
             name,
             description,
-            status: status === true || status === "true", // <-- aquí
+            // Convertir el valor de status a booleano
+            status: status === true || status === "true" || status === 1 || status === "1",
             period_id
         })
         res.status(201).json({data: newDimension})
@@ -66,12 +67,18 @@ export const updateDimension = async (req: Request, res: Response) => {
             return
         }
 
+        // Normalizar el status igual que en create
+        const normalizedStatus = status === true || status === "true" || status === 1 || status === "1"
+        
         await dimension.update({
             name,
             description,
-            status,
+            status: normalizedStatus, // Usar el valor normalizado
             period_id
         })
+        
+        console.log("Dimensión actualizada:", dimension.toJSON()); // Log para depuración
+        
         res.json({data: dimension})
     } catch (error) {
         console.log(error);
@@ -97,4 +104,15 @@ export const deleteDimension = async (req: Request, res: Response) => {
         res.status(500).json({data: "Error al eliminar la dimensión"})
     }
 }
+
+// DimensionController.ts
+
+export const getActiveDimensions = async (req: Request, res: Response) => {
+  try {
+    const activeDimensions = await Dimension.findAll({ where: { status: true } });
+    res.json({ data: activeDimensions }); // <-- así
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener dimensiones activas" });
+  }
+};
 

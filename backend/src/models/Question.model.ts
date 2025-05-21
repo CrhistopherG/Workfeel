@@ -17,7 +17,7 @@ class Question extends Model {
 
     @Column({
         type: DataType.STRING(255),
-        allowNull: true
+        allowNull: false
     })
     content: string
 

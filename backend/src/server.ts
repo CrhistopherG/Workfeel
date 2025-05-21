@@ -9,7 +9,7 @@ import router_dimension from "./routers/router_dimension";
 import db from "./config/db";
 import router_department from "./routers/router_department";
 import router_auth from "./routers/router_auth";
-
+import router_question from "./routers/router_questions";
 async function connectDB(){
     try {
         await db.authenticate();
@@ -63,6 +63,7 @@ server.use('/api/company', router_company);
 server.use('/api/department', router_department);
 server.use('/api', router_auth);
 server.use('/api/dimension', router_dimension)
+server.use('/api/question', router_question)  
 
 
 server.use('*', (req, res) => {

@@ -3,19 +3,19 @@ import Layout from './layouts/Layout'
 import User, { loader as usersLoader } from './views/User'
 import NewUser, { action as newUserAction } from './views/NewUser'
 import Login from './views/Login'
-import Dimensiones, { loader as DimensionLoader } from './components/Encuestas/Dimensiones'
-import Preguntas from './components/Encuestas/Preguntas'
+import Preguntas from './views/Preguntas'
 import Escalas from './components/Encuestas/Escalas'
 import Periodo, { loader as PeriodoLoader } from './components/Periodo/Periodo'
 import ProtectedRoute from './auth/ProtectedRoute'
 import ModuloPanelAdmin from './components/navbar-sidebar/Modulos/ModuloPanelAdmin'
-
-
+import Dimensiones from './views/Dimensiones'
 import CompanyList, { loader as companyLoader } from './views/CompanyList'
 import NewCompany, { action as newCompanyAction } from './views/NewCompany'
-
 //importamos el action de agregar dimension
 import AgregarDimensiones from './components/Encuestas/AgregarDimensiones'
+import EditarDimensiones from './components/Encuestas/EditarDimensiones';
+import AgregarPreguntas from './components/Encuestas/AgregarPreguntas'
+import EditarPreguntas from './components/Encuestas/EditarPreguntas'
 //importamos el action de agregar dimension
 export const router = createBrowserRouter([
     {
@@ -38,11 +38,23 @@ export const router = createBrowserRouter([
                     {
                         path: '/encuestas/dimensiones',
                         element: <Dimensiones />,
-                        loader: DimensionLoader
+                    }, {
+                        path: '/encuestas/dimensiones/agregar',
+                        element: <AgregarDimensiones />
+                    }, {
+                        path: '/encuestas/dimensiones/:id/editar',
+                        element: <EditarDimensiones />
                     },
                     {
                         path: '/encuestas/preguntas',
                         element: <Preguntas />
+                    }, {
+                        path: '/encuestas/preguntas/agregar',
+                        element: <AgregarPreguntas />
+                    },
+                    {
+                        path: '/encuestas/preguntas/editar/:id',
+                        element: <EditarPreguntas />
                     },
                     {
                         path: '/encuestas/escalas',

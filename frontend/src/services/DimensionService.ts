@@ -1,108 +1,141 @@
 import axios from "axios";
 import { safeParse } from "valibot";
-//importamos el index.ts de dimensione
 import { DraftDimensionSchema, DimensionsSchema } from "../types";
-import { useState } from "react";
 
+// Tipado para datos de dimensión
 type DimensionData = {
-    name: string;
-    description: string;
-    status: boolean;
-    period_id?: number; // <-- aquí, no period_id
+  name: string;
+  description: string;
+  status?: boolean | number | string;
+  period_id?: number;
+};
 
-}
+export type { DimensionData };
 
-//exportamos el dimension data
-export type { DimensionData }
-
-//creamos la funcion para agregar las dimensiones
+// Agregar dimensión
 export async function addDimension(data: DimensionData) {
-    try {
-        const result = safeParse(DraftDimensionSchema, data)
-        console.log("Resultado de validación:", result)
-        if (!result.success) {
-            console.error("Error de validación:", result.issues);
-            throw new Error("Datos no válidos")
-        }
+  try {
+    const cleanStatus =
+      data.status === true || data.status === "true" || data.status === 1;
 
-        if (result.success) {
-            const url = `${import.meta.env.VITE_API_URL}/api/dimension`
-            const { data } = await axios.post(url, {
-                name: result.output.name,
-                description: result.output.description,
-                status: result.output.status,
-                period_id: result.output.period_id
-            })
-            console.log("Respuesta API:", data)
-        }
-        else {
-            throw new Error('Datos no validos')
-        }
-    } catch (error) {
-        console.log(error);
-        return "Hubo un problema al registrar la dimension"
+    const result = safeParse(DraftDimensionSchema, {
+      ...data,
+      status: cleanStatus,
+    });
+
+    console.log("Resultado de validación:", result);
+
+    if (!result.success) {
+      console.error("Error de validación:", result.issues);
+      throw new Error("Datos no válidos");
     }
+
+    const url = `${import.meta.env.VITE_API_URL}/api/dimension`;
+    const { data: response } = await axios.post(url, {
+      name: result.output.name,
+      description: result.output.description,
+      status: result.output.status,
+      period_id: result.output.period_id ?? 1,
+    });
+
+    console.log("Respuesta API:", response);
+    return response;
+  } catch (error) {
+    console.log(error);
+    return "Hubo un problema al registrar la dimensión";
+  }
 }
 
-
+// Obtener todas las dimensiones
 export async function getDimension() {
-    try {
-        const url = `${import.meta.env.VITE_API_URL}/api/dimension`;
-        const { data } = await axios(url);
-        // Usa DimensionsSchema (array), no DimensionSchema (objeto)
-        const result = safeParse(DimensionsSchema, data.data);
-        if (result.success) {
-            return result.output;
-        } else {
-            console.log("Error en getDimension", result.issues);
-            throw new Error('Hubo un error...');
-        }
-    } catch (error) {
-        console.log(error);
-        return "Hubo un problema al mostrar las dimensiones";
+  try {
+    const url = `${import.meta.env.VITE_API_URL}/api/dimension`;
+    const { data } = await axios(url);
+    console.log("Respuesta completa de la API:", data); // <-- Ver estructura real
+    
+    // Verifica si los datos están en data.data o directamente en data
+    const rawData = data.data || data;
+    
+    const result = safeParse(DimensionsSchema, rawData);
+    if (result.success) {
+      // Normalizar status de manera más robusta
+      const cleanData = result.output.map((dim: any) => ({
+        ...dim,
+        status: Boolean(
+          dim.status === true || 
+          dim.status === 'true' || 
+          dim.status === 1 || 
+          dim.status === '1' ||
+          dim.status === 'abierto' ||
+          dim.status === 'Abierto'
+        ),
+      }));
+      console.log("Datos normalizados:", cleanData); // <-- Ver resultado
+      return cleanData;
+    } else {
+      console.error("Error en getDimension", result.issues);
+      throw new Error("Hubo un error...");
     }
+  } catch (error) {
+    console.error("Error en getDimension:", error);
+    return "Hubo un problema al mostrar las dimensiones";
+  }
 }
 
-//funcion para eliminar dimensiones
+
+// Eliminar dimensión
 export async function deleteDimension(id: number) {
-    try {
-        const url = `${import.meta.env.VITE_API_URL}/api/dimension/${id}`;
-        const { data } = await axios.delete(url);
-        return data;
-    } catch (error) {
-        console.log(error);
-        return "Hubo un problema al eliminar la dimension";
-    }
+  try {
+    const url = `${import.meta.env.VITE_API_URL}/api/dimension/${id}`;
+    const { data } = await axios.delete(url);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return "Hubo un problema al eliminar la dimensión";
+  }
 }
 
-
-// función para editar dimensiones
+// Actualizar dimensión
 export async function updateDimension(id: number, data: DimensionData) {
-    try {
-        // NO uses useState aquí
-        console.log('Datos enviados a updateDimension:', data)
-        const result = safeParse(DraftDimensionSchema, data)
-        if (!result.success) {
-            console.error("Error de validación:", result.issues)
-            throw new Error("Datos no válidos")
-        }
-        const url = `${import.meta.env.VITE_API_URL}/api/dimension/${id}`;
-        const { data: response } = await axios.put(url, {
-            name: result.output.name,
-            description: result.output.description,
-            status: result.output.status,
-            period_id: result.output.period_id ?? 1 // Valor por defecto si viene undefined
-        });
-        return response;
-    } catch (error) {
-        console.log(error);
-        return "Hubo un problema al actualizar la dimensión";
+  try {
+    const cleanStatus = Boolean(
+      data.status === true || 
+      data.status === "true" || 
+      data.status === 1 || 
+      data.status === "1"
+    );
+
+    const result = safeParse(DraftDimensionSchema, {
+      ...data,
+      status: cleanStatus,
+    });
+
+    if (!result.success) {
+      throw new Error("Datos no válidos");
     }
+
+    const url = `${import.meta.env.VITE_API_URL}/api/dimension/${id}`;
+    console.log("URL de actualización:", url);
+
+    const { data: response } = await axios.put(url, {
+      name: result.output.name,
+      description: result.output.description,
+      status: result.output.status,
+      period_id: result.output.period_id ?? 1,
+    });
+
+    console.log("Respuesta del servidor:", response);
+    return response;
+  } catch (error) {
+    console.error("Error en updateDimension:", error);
+    throw error;
+  }
 }
 
-//funcion para obtener una dimension por id
+
+// Obtener dimensión por ID
 export async function getDimensionById(id: number) {
-  const url = `${import.meta.env.VITE_API_URL}/api/dimension/${id}`
-  const { data } = await axios.get(url)
-  return data
+  const url = `${import.meta.env.VITE_API_URL}/api/dimension/${id}`;
+  const { data } = await axios.get(url);
+  return data;
 }
