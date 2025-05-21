@@ -9,7 +9,8 @@ import {
     boolean, 
     date, 
     optional, 
-    nullable 
+    nullable ,
+    transform,
 } from "valibot";
 
 // User Schemas
@@ -55,20 +56,34 @@ export const PeriodSchema = object({
     company_id: number()
 });
 
-// Dimension Schemas
 export const DimensionSchema = object({
-    dimension_id: number(),
-    name: string(),
-    description: string(),
-    period_id: nullable(number())
+  dimension_id: number(),
+  name: string(),
+  description: string(),
+  status: union([boolean(), string(), number()]), // Permitir múltiples tipos
+  period_id: nullable(number()),
 });
 
 export const DraftDimensionSchema = object({
-    name: string(),
-    description: string(),
-    status: boolean(),
-    period_id: optional(number())
+  name: string(),
+  description: string(),
+  status: boolean(),
+  period_id: optional(number()),
 });
+
+// Esquema para una pregunta que viene del backend
+export const QuestionSchema = object({
+  question_id: number(),
+  content: string(),
+  dimension_id: number(),
+});
+
+// Esquema para crear una nueva pregunta
+export const DraftQuestionSchema = object({
+  content: string(),
+  dimension_id: number(),
+});
+
 
 // Arrays y tipos
 export const UsersSchema = array(UserSchema);
@@ -81,3 +96,10 @@ export const DimensionsSchema = array(DimensionSchema);
 export type Dimension = InferOutput<typeof DimensionSchema>;
 
 export type Period = InferOutput<typeof PeriodSchema>;
+
+// Lista de preguntas
+export const QuestionsSchema = array(QuestionSchema);
+
+// Tipos
+export type Question = InferOutput<typeof QuestionSchema>;
+export type DraftQuestion = InferOutput<typeof DraftQuestionSchema>;
