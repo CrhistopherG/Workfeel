@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { CiUser } from 'react-icons/ci'
 export const Breadcrumb = () => {

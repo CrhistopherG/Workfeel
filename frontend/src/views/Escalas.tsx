@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getScales } from "../services/ScaleService";
 import { Scale } from "../types";
 import { useNavigate } from "react-router-dom";
