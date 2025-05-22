@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import {
   RiSettingsLine,
   RiArrowDownSLine,
@@ -60,7 +59,7 @@ export default function SideBar() {
             </ul>
           </li>
 
-          {/* Dropdown 2: Usuarios */}
+          {/* Dropdown 2: Resultados */}
           <li>
             <button
               type="button"

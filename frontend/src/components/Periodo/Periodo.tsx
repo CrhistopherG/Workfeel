@@ -4,7 +4,7 @@ import PeriodDetails from "../PeriodDetails";
 import { getPeriods, createPeriod } from "../../services/PeriodService";
 import { BsExclamationTriangle } from "react-icons/bs";
 import { useState } from "react";
-import axios from "axios";
+
 
 export async function loader() {
   try {
