@@ -48,8 +48,6 @@ export default function Login() {
           <p className="mt-2 text-sm text-gray-600">
             Ingresa tus datos de inicio de sesión
           </p>
-
-
         </div>
 
         {(localError) && (
