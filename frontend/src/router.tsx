@@ -4,7 +4,7 @@ import User, { loader as usersLoader } from './views/User'
 import NewUser, { action as newUserAction } from './views/NewUser'
 import Login from './views/Login'
 import Preguntas from './views/Preguntas'
-import Escalas from './components/Encuestas/Escalas'
+import Escalas from './views/Escalas'
 import Periodo, { loader as PeriodoLoader } from './components/Periodo/Periodo'
 import ProtectedRoute from './auth/ProtectedRoute'
 import ModuloPanelAdmin from './components/navbar-sidebar/Modulos/ModuloPanelAdmin'
@@ -16,6 +16,8 @@ import AgregarDimensiones from './components/Encuestas/AgregarDimensiones'
 import EditarDimensiones from './components/Encuestas/EditarDimensiones';
 import AgregarPreguntas from './components/Encuestas/AgregarPreguntas'
 import EditarPreguntas from './components/Encuestas/EditarPreguntas'
+import AgregarEscalas from './components/Encuestas/AgregarEscalas'
+import EditarScale from './components/Encuestas/EditarScale'
 //importamos el action de agregar dimension
 export const router = createBrowserRouter([
     {
@@ -59,6 +61,14 @@ export const router = createBrowserRouter([
                     {
                         path: '/encuestas/escalas',
                         element: <Escalas />
+                    },
+                    {
+                        path: '/encuestas/escalas/agregar',
+                        element: <AgregarEscalas />
+                    },
+                    {
+                        path: '/encuestas/escalas/editar/:id',
+                        element: <EditarScale />
                     },
                     {
                         path: '/panel_administrativo',

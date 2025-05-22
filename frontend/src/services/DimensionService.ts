@@ -1,7 +1,7 @@
 import axios from "axios";
 import { safeParse } from "valibot";
 import { DraftDimensionSchema, DimensionsSchema } from "../types";
-
+import { useAuth } from "../context/AuthContext";
 // Tipado para datos de dimensión
 type DimensionData = {
   name: string;
@@ -48,7 +48,9 @@ export async function addDimension(data: DimensionData) {
 
 // Obtener todas las dimensiones
 export async function getDimension() {
+  
   try {
+    
     const url = `${import.meta.env.VITE_API_URL}/api/dimension`;
     const { data } = await axios(url);
     console.log("Respuesta completa de la API:", data); // <-- Ver estructura real

@@ -62,3 +62,14 @@ export const deleteQuestion = async (id: number) => {
     throw error;
   }
 };
+
+
+export const getQuestions1 = async () => {
+  try {
+    const response = await axios.get(API_URL);
+    return response.data.data; // <-- Solo el array de preguntas
+  } catch (error: any) {
+    console.error('Error al obtener preguntas:', error.response?.data || error.message);
+    throw error;
+  }
+};

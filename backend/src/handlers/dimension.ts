@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { check, validationResult } from 'express-validator'
 import Dimension from '../models/Dimension.model'
-
+import Question from '../models/Question.model'
 //metodos get de nuestro dimension 
 export const getDimensions = async (req: Request, res: Response) => {
     try {
@@ -95,6 +95,13 @@ export const deleteDimension = async (req: Request, res: Response) => {
         if(!dimension) {
             res.status(404).json({data: "Dimension no encontrado"})
             return
+        }
+
+        // Verificar si hay preguntas asociadas a esta dimensión
+        const questionsCount = await Question.count({ where: { dimension_id: id } });
+        if (questionsCount > 0) {
+            res.status(400).json({ data: "No se puede eliminar la dimensión porque tiene preguntas asociadas. Elimina primero las preguntas." });
+            return;
         }
 
         await dimension.destroy()

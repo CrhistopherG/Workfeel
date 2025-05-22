@@ -1,5 +1,6 @@
 import { Table, Column, Model, Validate, DataType, PrimaryKey, AutoIncrement} from 'sequelize-typescript'
-
+import Question from './Question.model'
+import { ForeignKey } from 'sequelize-typescript'
 @Table({
     tableName: 'scale',
     timestamps: false
@@ -14,6 +15,13 @@ class Scale extends Model {
     })
     scale_id: number
 
+  @ForeignKey(() => Question)
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: false
+    })
+    question_id: number // <-- Nuevo campo
+    
     @Column({
         type: DataType.INTEGER,
         validate: {
