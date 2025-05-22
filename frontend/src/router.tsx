@@ -17,11 +17,17 @@ import AgregarPreguntas from './components/Encuestas/AgregarPreguntas'
 import EditarPreguntas from './components/Encuestas/EditarPreguntas'
 import AgregarEscalas from './components/Encuestas/AgregarEscalas'
 import EditarScale from './components/Encuestas/EditarScale'
+import Register, {action as RegisterAction} from './views/Register'
 
 export const router = createBrowserRouter([
     {
         path: '/login',
         element: <Login />
+    },
+    {
+        path: '/register',
+        element: <Register />,
+        action: RegisterAction
     },
     {
         path: '/',
