@@ -14,7 +14,7 @@ export default function ModuloResultados() {
         </li>
         <li>
             <Link
-            to="/resultados/nivel_satisfaccion"
+            to="/resultados/niveles_satisfaccion"
             className="flex items-center w-full p-2 text-gray-900 rounded-lg pl-11 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
             >
             Niveles de satisfacción

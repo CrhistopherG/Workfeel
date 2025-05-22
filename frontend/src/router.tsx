@@ -9,12 +9,24 @@ import Escalas from './components/Encuestas/Escalas'
 import Periodo, { loader as PeriodoLoader } from './components/Periodo/Periodo'
 import ProtectedRoute from './auth/ProtectedRoute'
 import ModuloPanelAdmin from './components/navbar-sidebar/Modulos/ModuloPanelAdmin'
+import ListaPuestos from './components/Generales/ListaPuestos'
+import PlanAccion from './components/Generales/PlanAccion'
+import Configuraciones from './components/Generales/Configuraciones'
+import Resultado from './components/Resultados/Resultado'
+import NivelesSatisfaccion from './components/Resultados/NivelesSatisfaccion'
+import CompararPeriodos from './components/Resultados/CompararPeriodos'
+import Register, {action as RegisterAction} from './views/Register'
 
 
 export const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />
+  },
+  {
+    path: '/register',
+    element: <Register />,
+    action: RegisterAction
   },
   {
     path: '/',
@@ -55,7 +67,31 @@ export const router = createBrowserRouter([
             path: '/panel_administrativo/usuarios/nuevo',
             element: <NewUser />,
             action: newUserAction
-          }
+          },
+          {
+            path: '/generales/lista_puestos',
+            element: <ListaPuestos />
+          },
+          {
+            path: '/generales/plan_accion',
+            element: <PlanAccion />
+          },
+          {
+            path: '/generales/configuraciones',
+            element: <Configuraciones />
+          },
+          {
+            path: '/resultados/resultado',
+            element: <Resultado />
+          },
+          {
+            path: '/resultados/niveles_satisfaccion',
+            element: <NivelesSatisfaccion />
+          },
+          {
+            path: '/resultados/comparar_periodos',
+            element: <CompararPeriodos />
+          },
         ]
       }
     ]
