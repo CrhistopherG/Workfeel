@@ -1,32 +1,48 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { addDimension } from '../../services/DimensionService'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { addDimension } from '../../services/DimensionService';
+import { getPeriods } from '../../services/PeriodService';
+
+
 
 const AgregarDimensiones = () => {
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
-  const [status, setStatus] = useState(true)
-  const [period_id, setPeriodId] = useState(1)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState(false)
-  const navigate = useNavigate()
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [status, setStatus] = useState(true);
+  const [period_id, setPeriodId] = useState<number | undefined>(undefined); const [periodos, setPeriodos] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchPeriodos = async () => {
+      try {
+        const data = await getPeriods();
+        setPeriodos(data.data); // Ajusta según la estructura de tu respuesta
+        if (data.data.length === 1) setPeriodId(data.data[0].period_id);
+      } catch {
+        setPeriodos([]);
+      }
+    };
+    fetchPeriodos();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError('')
-    setSuccess(false)
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setSuccess(false);
     try {
-      await addDimension({ name, description, status, period_id })
-      setSuccess(true)
-      setTimeout(() => navigate('/Encuestas/dimensiones'), 1200)
+      await addDimension({ name, description, status, period_id });
+      setSuccess(true);
+      setTimeout(() => navigate('/Encuestas/dimensiones'), 1200);
     } catch (err) {
-      setError('Error al agregar dimensión')
+      setError('Error al agregar dimensión');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="max-w-lg mx-auto mt-10 bg-white p-8 rounded-xl shadow-lg">
@@ -42,7 +58,9 @@ const AgregarDimensiones = () => {
       </div>
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">Nombre <span className="text-red-500">*</span></label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Nombre <span className="text-red-500">*</span>
+          </label>
           <input
             type="text"
             className="border border-gray-300 p-2 rounded w-full focus:outline-blue-400"
@@ -53,7 +71,9 @@ const AgregarDimensiones = () => {
           />
         </div>
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">Descripción <span className="text-red-500">*</span></label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Descripción <span className="text-red-500">*</span>
+          </label>
           <input
             type="text"
             className="border border-gray-300 p-2 rounded w-full focus:outline-blue-400"
@@ -62,6 +82,22 @@ const AgregarDimensiones = () => {
             required
             placeholder="Describe brevemente la dimensión"
           />
+        </div>
+        <div>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Periodo <span className="text-red-500">*</span>
+          </label>
+          <select
+            className="border border-gray-300 p-2 rounded w-full focus:outline-blue-400"
+            value={period_id ?? ""}
+            onChange={e => setPeriodId(e.target.value === "" ? undefined : Number(e.target.value))}
+            required
+          >
+            <option value="">Selecciona un periodo...</option>
+            {periodos.map(p => (
+              <option key={p.period_id} value={p.period_id}>{p.name}</option>
+            ))}
+          </select>
         </div>
         <div className="flex items-center gap-2">
           <input
@@ -84,7 +120,7 @@ const AgregarDimensiones = () => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default AgregarDimensiones
+export default AgregarDimensiones;

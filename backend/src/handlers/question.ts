@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Question from "../models/Question.model";
 import Dimension from "../models/Dimension.model";
+import Scale from "../models/Scale.model";
 
 // Obtener todas las preguntas
 export const getQuestions = async (req: Request, res: Response) => {
@@ -130,6 +131,13 @@ export const deleteQuestion = async (req: Request, res: Response) => {
 
     if (!question) {
       res.status(404).json({ data: "Pregunta no encontrada" });
+      return;
+    }
+
+    //verificar si hay escalas asociadas a esta preguntas 
+    const scalesCount = await Scale.count({ where: { question_id: id } });
+    if (scalesCount > 0) {
+      res.status(400).json({ data: "No se puede eliminar la pregunta porque tiene escalas asociadas. Elimina primero las escalas." });
       return;
     }
 

@@ -84,6 +84,22 @@ export const DraftQuestionSchema = object({
   dimension_id: number(),
 });
 
+// Esquema para una pregunta que viene del backend
+export const ScaleSchema = object({
+  scale_id: number(),
+  value: nullable(number()), // Puede ser null para opción múltiple
+  description: string(),
+  question_id: number(),
+});
+
+// Esquema para crear una nueva pregunta
+export const DraftScaleSchema = object({
+  value: nullable(number()), // Puede ser null para opción múltiple
+  description: string(),
+  question_id: number(),
+});
+
+
 
 // Arrays y tipos
 export const UsersSchema = array(UserSchema);
@@ -103,3 +119,7 @@ export const QuestionsSchema = array(QuestionSchema);
 // Tipos
 export type Question = InferOutput<typeof QuestionSchema>;
 export type DraftQuestion = InferOutput<typeof DraftQuestionSchema>;
+
+//tipos de scale : 
+export const ScalesSchema = array(ScaleSchema);
+export type Scale = InferOutput<typeof ScaleSchema>;
