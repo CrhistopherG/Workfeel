@@ -18,6 +18,12 @@ import EditarPreguntas from './components/Encuestas/EditarPreguntas'
 import AgregarEscalas from './components/Encuestas/AgregarEscalas'
 import EditarScale from './components/Encuestas/EditarScale'
 import Register, {action as RegisterAction} from './views/Register'
+import Configuraciones from './components/Generales/Configuraciones'
+import ListaPuestos from './components/Generales/ListaPuestos'
+import Resultado from './components/Resultados/Resultado'
+import PlanAccion from './components/Generales/PlanAccion'
+import NivelesSatisfaccion from './components/Resultados/NivelesSatisfaccion'
+import CompararPeriodos from './components/Resultados/CompararPeriodos'
 
 export const router = createBrowserRouter([
     {
@@ -101,6 +107,30 @@ export const router = createBrowserRouter([
                         path: '/empresas/nueva',
                         element: <NewCompany />,
                         action: newCompanyAction
+                    },
+                    {
+                        path: '/generales/configuraciones',
+                        element: <Configuraciones />
+                    },
+                    {
+                        path: '/generales/lista_puestos',
+                        element: <ListaPuestos />
+                    },
+                    {
+                        path: '/generales/plan_accion',
+                        element: <PlanAccion />
+                    },
+                    {
+                        path: '/resultados/resultado',
+                        element: <Resultado />
+                    },
+                    {
+                        path: '/resultados/niveles_satisfaccion',
+                        element: <NivelesSatisfaccion />
+                    },
+                    {
+                        path: '/resultados/comparar_periodos',
+                        element: <CompararPeriodos />
                     }
                 ]
             }
