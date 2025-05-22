@@ -1,7 +1,6 @@
 import axios from "axios";
 import { safeParse } from "valibot";
 import { DraftDimensionSchema, DimensionsSchema } from "../types";
-import { useAuth } from "../context/AuthContext";
 // Tipado para datos de dimensión
 type DimensionData = {
   name: string;
