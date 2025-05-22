@@ -2,9 +2,11 @@
   "name": "rest_api_workfeel",
   "version": "1.0.0",
   "description": "REST API diseñada para Workfeel",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "kill-port 4010 && kill-port 4010 && nodemon --exec ts-node src/index.ts"
+    "dev": "kill-port 4010 && nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "author": "Crhistopher Isai Ramirez Gutierrez",
   "license": "ISC",
