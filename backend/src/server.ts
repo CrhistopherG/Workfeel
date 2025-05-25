@@ -11,6 +11,7 @@ import router_department from "./routers/router_department";
 import router_auth from "./routers/router_auth";
 import router_question from "./routers/router_questions";
 import router_scale from "./routers/router_scale";
+import router_formulario from "./routers/router_formulario";
 async function connectDB(){
     try {
         await db.authenticate();
@@ -66,6 +67,9 @@ server.use('/api', router_auth);
 server.use('/api/dimension', router_dimension)
 server.use('/api/question', router_question)  
 server.use('/api/scale', router_scale)
+server.use('/api/formulario', router_formulario)
+// Middleware para manejar errores
+
 
 server.use('*', (req, res) => {
   res.status(404).json({ message: `Ruta no encontrada: ${req.originalUrl}` });

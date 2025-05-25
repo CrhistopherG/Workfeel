@@ -1,6 +1,6 @@
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo, Default} from 'sequelize-typescript'
+import { HasMany,Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo, Default} from 'sequelize-typescript'
 import Period from './Period.model'
-
+import Question from './Question.model';
 @Table({
     tableName: 'dimension',
     timestamps: false
@@ -10,6 +10,8 @@ class Dimension extends Model {
 
     @PrimaryKey
     @AutoIncrement
+
+
     @Column({
         type: DataType.INTEGER,
         field: 'dimension_id' // <-- asegúrate de esto
@@ -43,6 +45,9 @@ class Dimension extends Model {
 
     @BelongsTo(() => Period)
     period: Period
+
+    @HasMany(() => Question)
+    preguntas: Question[];
 }
 
 export default Dimension
