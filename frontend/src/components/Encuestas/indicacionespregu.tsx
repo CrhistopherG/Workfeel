@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const IndicacionesPregu = () => {
     return (
         <div className="bg-gray-100 p-4 rounded-md shadow-md mb-6">
