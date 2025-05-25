@@ -12,15 +12,17 @@ import router_auth from "./routers/router_auth";
 import router_question from "./routers/router_questions";
 import router_scale from "./routers/router_scale";
 
-async function connectDB() {
-  try {
-    await db.authenticate();
-    db.sync();
-    console.log(colors.bgBlue.bold("Conexion exitosa a la base de datos"));
-  } catch (error) {
-    console.log(error);
-    console.log(colors.red.bold("Hubo un error al conectar a la base de datos"));
-  }
+import router_formulario from "./routers/router_formulario";
+async function connectDB(){
+    try {
+        await db.authenticate();
+        db.sync();
+        console.log(colors.bgBlue.bold('Conexion exitosa a la base de datos'));
+    } catch (error) {
+        console.log(error);
+        console.log(colors.red.bold('Hubo un error al conectar a la base de datos'));
+    }
+
 }
 
 connectDB();
@@ -59,16 +61,20 @@ server.options("*", cors(corsOptions)); // Para preflight
 
 server.use(express.json());
 
-// Routers
-server.use("/api/products", router_products);
-server.use("/api/users", router_users);
-server.use("/api/roles", router_roles);
-server.use("/api/company", router_company);
-server.use("/api/department", router_department);
-server.use("/api", router_auth);
-server.use("/api/dimension", router_dimension);
-server.use("/api/question", router_question);
-server.use("/api/scale", router_scale);
+
+// Mandar routers
+server.use('/api/products', router_products);
+server.use('/api/users', router_users);
+server.use('/api/roles', router_roles);
+server.use('/api/company', router_company);
+server.use('/api/department', router_department);
+server.use('/api', router_auth);
+server.use('/api/dimension', router_dimension)
+server.use('/api/question', router_question)  
+server.use('/api/scale', router_scale)
+server.use('/api/formulario', router_formulario)
+
+
 
 // Ruta para manejar rutas no encontradas
 server.use("*", (req, res) => {

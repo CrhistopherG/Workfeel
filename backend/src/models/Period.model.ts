@@ -1,5 +1,6 @@
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo, Default} from 'sequelize-typescript'
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo, Default, HasMany} from 'sequelize-typescript'
 import Company from './Company.model'
+import Dimension from './Dimension.model'
 
 @Table({
     tableName: 'period',
@@ -45,6 +46,9 @@ class Period extends Model {
 
     @BelongsTo(() => Company)
     company: Company
+
+     @HasMany(() => Dimension)
+    dimensiones: Dimension[];
 }
 
 export default Period
