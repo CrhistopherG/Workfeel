@@ -89,10 +89,10 @@ export default function Register() {
 
         <div className="text-sm text-center text-gray-600">
           <Link
-            to="/panel_administrativo/usuarios/ver_todos"
-            className="font-medium text-blue-600 hover:text-blue-500"
+            to="/login"
+            className="font-medium text-blue-600 underline hover:text-blue-500"
           >
-            Ver todos los usuarios
+            ¿Ya tienes una cuenta? Inicia sesión
           </Link>
         </div>
       </div>

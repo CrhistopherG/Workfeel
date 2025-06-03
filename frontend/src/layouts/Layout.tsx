@@ -15,7 +15,7 @@ export default function Layout() {
         <div>
           <SideBar />
         </div>
-        <div className="justify-center w-full">
+        <div className="justify-center ms-60 mt-10 w-full">
           <main className="mt-10 mx-5 p-5 bg-white shadow-lg justify-items-center">
             {isRoot ? (
               <div className="text-center text-4xl text-gray-600">

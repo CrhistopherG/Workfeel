@@ -12,7 +12,7 @@ export default function NavBar() {
   const { user, logout } = useAuth();
 
   return (
-    <header className="bg-gray-300 shadow-black lg max-h-17 shadow flex justify-between">
+    <header className="bg-gray-300 shadow-black fixed w-full z-10 lg max-h-17 shadow flex justify-between">
       <div className="mx-4 max-w-6xl py-2 flex text-start items-center">
         <Link to="/periodo">
           <img className="lg:w-xs md:w-2xs w-40" src="/workfeel-logo.png" alt="Workfeel Logo"/>
