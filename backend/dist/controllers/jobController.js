@@ -35,6 +35,7 @@ exports.getPuestosByUser = getPuestosByUser;
 // Crear nuevo puesto
 const createPuesto = async (req, res) => {
     const { name, description, department_id } = req.body;
+    req.body.description = "Lorem ipsum";
     try {
         const newJob = await Job_model_1.default.create({
             name,

@@ -35,6 +35,7 @@ export const getPuestosByUser = async (req: Request, res: Response) : Promise<an
 // Crear nuevo puesto
 export const createPuesto = async (req: Request, res: Response) => {
   const { name, description, department_id } = req.body;
+  req.body.description = "Lorem ipsum"
 
   try {
     const newJob = await Job.create({

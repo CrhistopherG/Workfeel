@@ -1,8 +1,9 @@
 import { useState } from "react";
-import {FaEdit, FaSearch, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 export default function ListaPuestos() {
-  const [setPuestos] = useState([
+  // Corregido: usamos [puestos, setPuestos]
+  const [puestos, setPuestos] = useState([
     { id: 1, puesto: "Jefe de Contabilidad Fiscal", departamento: "Contabilidad" },
     { id: 2, puesto: "Jefe de Soporte IT", departamento: "Soporte IT" },
     { id: 3, puesto: "Analista de Recursos Humanos", departamento: "RRHH" },
@@ -18,16 +19,15 @@ export default function ListaPuestos() {
   };
 
   const agregarPuesto = async () => {
-    // Obtener userId de localStorage
     const userStr = localStorage.getItem("user");
-    
+
     if (!userStr) {
       alert("Usuario no autenticado");
       return;
     }
 
-    const user = JSON.parse(userStr)
-    const userId = user.user_id
+    const user = JSON.parse(userStr);
+    const userId = user.user_id;
 
     try {
       const response = await fetch(`/api/users/${userId}/listapuestos`, {
@@ -35,7 +35,7 @@ export default function ListaPuestos() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: nuevoPuesto.puesto,
-          department: nuevoPuesto.departamento,
+          department: 1,
         }),
       });
 
@@ -48,7 +48,7 @@ export default function ListaPuestos() {
         {
           id: puestoCreado.job_id || prev.length + 1,
           puesto: puestoCreado.name || nuevoPuesto.puesto,
-          departamento: puestoCreado.department || nuevoPuesto.departamento,
+          departamento: "",
         },
       ]);
 
@@ -71,7 +71,35 @@ export default function ListaPuestos() {
           </button>
         </section>
 
-        {/* ...resto del componente (tabla, filtros, etc.) */}
+        <section className="overflow-x-auto rounded-lg shadow border border-gray-200 bg-white">
+          <table className="min-w-full divide-y divide-gray-200 text-gray-700 text-sm">
+            <thead className="bg-gray-800 text-white">
+              <tr>
+                <th className="px-4 py-2 text-left">#</th>
+                <th className="px-4 py-2 text-left">Puesto</th>
+                <th className="px-4 py-2 text-left">Departamento</th>
+                <th className="px-4 py-2 text-center">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {puestos.map((p) => (
+                <tr key={p.id} className="hover:bg-gray-50">
+                  <td className="px-4 py-2">{p.id}</td>
+                  <td className="px-4 py-2">{p.puesto}</td>
+                  <td className="px-4 py-2">{p.departamento}</td>
+                  <td className="px-4 py-2 flex justify-center space-x-3 text-center">
+                    <button className="text-blue-600 hover:text-blue-800 flex items-center gap-1 text-sm">
+                      <FaEdit /> Editar
+                    </button>
+                    <button className="text-red-600 hover:text-red-800 flex items-center gap-1 text-sm">
+                      <FaTrash /> Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
 
         {/* Modal */}
         {isOpen && (
