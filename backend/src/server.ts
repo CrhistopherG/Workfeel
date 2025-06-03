@@ -11,6 +11,7 @@ import router_department from "./routers/router_department";
 import router_auth from "./routers/router_auth";
 import router_question from "./routers/router_questions";
 import router_scale from "./routers/router_scale";
+import router_job from './routers/router_job';
 
 import router_formulario from "./routers/router_formulario";
 async function connectDB(){
@@ -73,6 +74,7 @@ server.use('/api/dimension', router_dimension)
 server.use('/api/question', router_question)  
 server.use('/api/scale', router_scale)
 server.use('/api/formulario', router_formulario)
+server.use('/api', router_job);
 
 
 

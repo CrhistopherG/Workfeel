@@ -16,6 +16,7 @@ const router_department_1 = __importDefault(require("./routers/router_department
 const router_auth_1 = __importDefault(require("./routers/router_auth"));
 const router_questions_1 = __importDefault(require("./routers/router_questions"));
 const router_scale_1 = __importDefault(require("./routers/router_scale"));
+const router_job_1 = __importDefault(require("./routers/router_job"));
 const router_formulario_1 = __importDefault(require("./routers/router_formulario"));
 async function connectDB() {
     try {
@@ -70,6 +71,7 @@ server.use('/api/dimension', router_dimension_1.default);
 server.use('/api/question', router_questions_1.default);
 server.use('/api/scale', router_scale_1.default);
 server.use('/api/formulario', router_formulario_1.default);
+server.use('/api', router_job_1.default);
 // Ruta para manejar rutas no encontradas
 server.use("*", (req, res) => {
     res.status(404).json({ message: `Ruta no encontrada: ${req.originalUrl}` });
