@@ -1,5 +1,6 @@
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo} from 'sequelize-typescript'
+import { HasMany,Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo} from 'sequelize-typescript'
 import Dimension from './Dimension.model'
+import Scale from './Scale.model'
 
 @Table({
     tableName: 'question',
@@ -10,6 +11,8 @@ class Question extends Model {
 
     @PrimaryKey
     @AutoIncrement
+
+    
     @Column({
         type: DataType.INTEGER,
     })
@@ -29,6 +32,9 @@ class Question extends Model {
 
     @BelongsTo(() => Dimension)
     dimension: Dimension
+
+    @HasMany(() => Scale)
+    escalas: Scale[];
 }
 
 export default Question

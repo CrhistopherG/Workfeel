@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getActiveQuestions } from "../services/QuestionService";
 import { Question } from "../types";
 import { useNavigate } from "react-router-dom";
