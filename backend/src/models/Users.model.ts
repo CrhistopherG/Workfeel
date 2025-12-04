@@ -12,59 +12,38 @@ import {
   import Rol from "./Rol.model";
   import Company from "./Company.model";
   
-  @Table({
-    tableName: "users",
-    timestamps: false, // Evita createdAt y updatedAt
-  })
-  class User extends Model {
-    @PrimaryKey
-    @AutoIncrement
-    @Column({
-      type: DataType.INTEGER,
-    })
-    user_id!: number;
-  
-    @Column({
-      type: DataType.STRING(100),
-    })
-    name!: string;
-  
-    @Column({
-      type: DataType.STRING(255),
-      allowNull: false // Asegúrate que no sea null
-    })
-    password!: string; // El ! indica que siempre estará presente
-  
-    @Column({
-      type: DataType.STRING(255),
-      unique: true,
-    })
-    email!: string;
-  
-    // Llave foránea hacia Rol
-    @ForeignKey(() => Rol)
-    @Default(2) // Rol por defecto: 2 (ej. Administrador)
-    @Column({
-      type: DataType.INTEGER,
-      allowNull: true,
-    })
-    rol_id!: number;
-  
-    @BelongsTo(() => Rol)
-    rol!: Rol;
-  
-    // Llave foránea hacia Company
-    @ForeignKey(() => Company)
-    @Default(null)
-    @Column({
-      type: DataType.INTEGER,
-      allowNull: true,
-    })
-    company_id!: number;
-  
-    @BelongsTo(() => Company)
-    company!: Company;
-  }
+  @Table({ tableName: "users", timestamps: false })
+class User extends Model<User> {
+  @PrimaryKey
+  @AutoIncrement
+  @Column(DataType.INTEGER)
+  user_id: number;
+
+  @Column(DataType.STRING(100))
+  name: string;
+
+  @Column({ type: DataType.STRING(255), allowNull: false })
+  password: string;
+
+  @Column({ type: DataType.STRING(255), unique: true })
+  email: string;
+
+  @ForeignKey(() => Rol)
+  @Default(2)
+  @Column(DataType.INTEGER)
+  rol_id: number;
+
+  @BelongsTo(() => Rol)
+  rol: Rol;
+
+  @ForeignKey(() => Company)
+  @Column(DataType.INTEGER)
+  company_id: number;
+
+  @BelongsTo(() => Company)
+  company: Company;
+}
+
   
   export default User;
   
